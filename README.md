@@ -1,0 +1,90 @@
+# nimconfig
+
+installp -acgXd /cdrom bos.sysmgt.nim.master
+installp -acgXd /cdrom bos.sysmgt.nim.spot
+
+installp -acgXd /cdrom openssh
+installp -ld/dev/cd0 |grep ssh
+
+nimconfig -a pif_name=en0 -a netname=network1 -a cable_type=tp -a platform=chrp -a netboot_kernel=mp
+
+nim -o change -a global_export=yes master
+nim  -o change -a max_nimesis_threads=60 master
+nim -o change -a validate_cpuid=no master
+nim -o change -a if1="network1 nimserver 36E4A775F403" master
+
+###############################
+nim -o define -t lpp_source -a location=/export/lpp_source/AIX610Base -a server=master -a source=/dev/cd0 -a packages=all lppsource_aix610
+nim -o define -t spot -a server=master -a location=/export/spot -a  source=lppsource_aix610 spot_610
+nim -o define -t spot -a server=master -a location=/export/spot -a  source=lppsource_aix610 spot_524
+###############################
+
+###############################
+nim -o define -t mksysb -a server=master -a location=/oracle/mksysb/aix610mksysb aix610mksysb
+
+nim -o define -t mksysb -a server=master -a location=/export/mksysb/aix610minmksysb -a source=minaix -a mk_image=yes -amksysb_flags="X" aix610minmksysb
+###############################
+
+nim -Fo define -t standalone -a platform=chrp  if1="" -a netboot_kernel=map aix610mksysb
+
+mount -rv cdrfs /dev/cd0 /cdrom
+
+###############################
+nim -o define -t bosinst_data -a server=master -a location=/export/bosinst_data/nonprompted.bosinst  noprompt_ow_525
+nim -o define -t image_data -a server=master -a location=/export/bosinst/image.data  image_ow
+###############################
+
+#################################
+
+nim -o define -t standalone -a platform=chrp -a netboot_kernel=mp -a if1="find_net minaix 0" -a cable_type1=bnc -a net_settings1="auto auto" minaix
+
+nim -o bos_inst -a source=rte -a spot=spot_524 -a lpp_source=lppsource_aix610 -a accept_licenses=yes -a boot_client=no -a bosinst_data=noprompt_ow_525 minaix
+
+
+cable_type1 tp  bnc
+nim -o define -t standalone -a platform=chrp -a netboot_kernel=mp -a if1="find_net image524 0" -a cable_type1=bnc -a net_settings1="auto auto" image524
+
+nim -o bos_inst -a source=rte -a spot=spot_524 -a lpp_source=lppsource_aix610 -a accept_licenses=yes -a boot_client=no -a bosinst_data=noprompt_ow_525 image524
+
+nim -o bos_inst -a source=rte -a spot=spot_524 -a lpp_source=lppsource_aix610 -a accept_licenses=yes -a boot_client=no -a image_data=image_ow -a bosinst_data=noprompt_ow_525 image524
+
+grant all privileges on *.* to 'root'@'%' identified by '123456' with grant option
+
+lpar_netboot -t ent -D -s auto -d auto -i -f -m 36E4AE06A902 -S 192.168.70.12 -G 192.168.70.30 -C 192.168.70.13 image524 image524 Server-8202-E4D-SN841FE3W
+
+lpar_netboot -t ent -D -s auto -d auto -i -f -m 36E4AE9C4D03 -S 192.168.70.14 -G 192.168.70.30 -C 192.168.70.15 minaix minaix Server-8202-E4D-SN841FE3W
+
+lshwres -r virtualio --rsubtype eth -m  Server-8202-E4D-SN841FE3W --level lpar -F lpar_name,mac_addr
+
+nim -o reset -F image524&&nim -o deallocate -a subclass=all image524&&nim -o remove image524
+nim -o reset -F testVmachine&&nim -o deallocate -a subclass=all testVmachine&&nim -o remove testVmachine
+
+refcode  0c31
+
+##############################################
+nim -o define -t standalone -a platform=chrp -a netboot_kernel=mp -a if1="find_net nim-server 0" -a cable_type1=bnc -a net_settings1="auto auto" nim-server
+
+nim -o bos_inst -a source=rte -a spot=spot_524 -a lpp_source=lppsource_aix610 -a accept_licenses=yes -a boot_client=no -a bosinst_data=noprompt_ow_525 nim-server
+lpar_netboot -t ent -D -s auto -d auto -i -f -m 36E4A775F403 -S 192.168.70.12 -G 192.168.70.30 -C 192.168.70.20 nim-server nim-server Server-8202-E4D-SN841FE3W
+
+nim -Fo reset  minaix&&nim -o deallocate -a subclass=all minaix&&nim -o remove minaix
+
+##################################################
+crfs -v jfs2 -g rootvg -a size=2G  -m /export/ec_filestemp -A yes -p rw -a logname=INLINE
+crfs -v jfs2 -g rootvg -a size=12G  -m /export/images -A yes -p rw -a logname=INLINE
+crfs -v jfs2 -g rootvg -a size=4G  -m /export/lpp_source -A yes -p rw -a logname=INLINE
+crfs -v jfs2 -g rootvg -a size=40G -m /export/mksysb -A yes -p rw -a logname=INLINE
+crfs -v jfs2 -g rootvg -a size=20G -m /export/spot -A yes -p rw -a logname=INLINE
+crfs -v jfs2 -g rootvg -a size=1G -m /tftpboot -A yes -p rw -a logname=INLINE
+mkdir -p /export/bosinst_data
+mkdir -p /export/ecloudpw
+mkdir -p /export/fb_script
+mkdir -p /export/installp_bundle
+mkdir -p /export/image_data
+mount /export/ec_filestemp
+mount /export/images
+mount /export/lpp_source
+mount /export/mksysb
+mount /export/spot
+mount /tftpboot
+##################################################
