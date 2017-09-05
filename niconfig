@@ -86,3 +86,20 @@ mount /export/mksysb
 mount /export/spot
 mount /tftpboot
 ##################################################
+
+
+register and initialize client to master example:
+niminit -a name=test112 -a master=aix105 connect=shell\
+-a pif_name=en0 -a platform=chrp -a netboot_kernel=mp \
+-a cable_type1=bnc
+nimclient -p
+nimclient -l -l test112
+
+nim -o define -t standalone -a platform=chrp -a if1="find_net test112 0" -a netboot_kernel=mp -a connect=shell test112
+
+
+nim -o define -t mksysb -a server=master -a location=/export/mksysb/aix/aix53 -a source=test112 -a mk_image=yes -amksysb_flags="X" aix53_mksysb
+
+nim -o define -t spot -a server=master -a source=aix53_mksysb -a location=/export/spot/aix53 -a auto_expand=yes -a comments='spot create from the mksysb of the nim master' aix53_spot
+
+
