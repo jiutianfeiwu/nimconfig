@@ -102,4 +102,7 @@ nim -o define -t mksysb -a server=master -a location=/export/mksysb/aix/aix53 -a
 
 nim -o define -t spot -a server=master -a source=aix53_mksysb -a location=/export/spot/aix53 -a auto_expand=yes -a comments='spot create from the mksysb of the nim master' aix53_spot
 
+###################################################
+Using the bosinst.data file:
+/usr/lpp/bosinst/bicheck filename
 
