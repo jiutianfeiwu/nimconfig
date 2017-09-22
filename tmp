@@ -23,3 +23,6 @@ logicalMem
 totalIOMem
 mappedIOMem
 backedPhysicalMem
+
+
+wrapper.java.additional.6=-Djava.rmi.server.hostname=192.168.159.22
