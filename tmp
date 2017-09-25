@@ -26,3 +26,10 @@ backedPhysicalMem
 
 
 wrapper.java.additional.6=-Djava.rmi.server.hostname=192.168.159.22
+
+droppedPackets
+sentBytes
+transferredBytes
+receivedPackets
+receivedBytes
+sentPackets
