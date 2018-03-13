@@ -106,3 +106,4 @@ nim -o define -t spot -a server=master -a source=aix53_mksysb -a location=/expor
 Using the bosinst.data file:
 /usr/lpp/bosinst/bicheck filename
 
+lsconf |grep -E 'Machine Serial Number|LPAR Info'
