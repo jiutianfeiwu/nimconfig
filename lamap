@@ -1,0 +1,186 @@
+$ lsmap -all
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost0          U8202.E4D.841FE3W-V1-C2                      0x00000002
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost1          U8202.E4D.841FE3W-V1-C14                     0x00000009
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost2          U8202.E4D.841FE3W-V1-C11                     0x00000002
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost3          U8202.E4D.841FE3W-V1-C52                     0x00000000
+
+VTD                   vtscsi2
+Status                Defined
+LUN                   0x8100000000000000
+Backing device        aix03_rootvg.d5c193cbf5bb9a0e2b253711b0ab86fe
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost4          U8202.E4D.841FE3W-V1-C12                     0x00000002
+
+VTD                   vtscsi3
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv01
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost5          U8202.E4D.841FE3W-V1-C13                     0x00000004
+
+VTD                   vtscsi0
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv03
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost6          U8202.E4D.841FE3W-V1-C15                     0x00000005
+
+VTD                   vtscsi5
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv05
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost7          U8202.E4D.841FE3W-V1-C16                     0x00000005
+
+VTD                   vtscsi7
+Status                Available
+LUN                   0x8100000000000000
+Backing device        hdisk3
+Physloc               U78AA.001.WZSL6G3-P1-C4-T1-W20814482E5A35310-L2000000000000
+Mirrored              false
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost8          U8202.E4D.841FE3W-V1-C17                     0x00000002
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost9          U8202.E4D.841FE3W-V1-C18                     0x00000005
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost10         U8202.E4D.841FE3W-V1-C19                     0x00000009
+
+VTD                   vtopt0
+Status                Available
+LUN                   0x8200000000000000
+Backing device        /var/vio/VMLibrary/6108021.iso
+Physloc
+Mirrored              N/A
+
+VTD                   vtscsi1
+Status                Available
+LUN                   0x8300000000000000
+Backing device        lv02
+Physloc
+Mirrored              N/A
+
+VTD                   vtscsi10
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv07
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost11         U8202.E4D.841FE3W-V1-C21                     0x00000002
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost12         U8202.E4D.841FE3W-V1-C22                     0x00000002
+
+VTD                   NO VIRTUAL TARGET DEVICE FOUND
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost13         U8202.E4D.841FE3W-V1-C23                     0x00000007
+
+VTD                   vtscsi4
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv04
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost14         U8202.E4D.841FE3W-V1-C24                     0x00000008
+
+VTD                   vtscsi6
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv08
+Physloc
+Mirrored              N/A
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost16         U8202.E4D.841FE3W-V1-C26                     0x0000000b
+
+VTD                   vtscsi9
+Status                Available
+LUN                   0x8100000000000000
+Backing device        lv11
+Physloc
+Mirrored              N/A
+
+$ lsmap -all -npiv
+Name          Physloc                            ClntID ClntName       ClntOS
+------------- ---------------------------------- ------ -------------- -------
+vfchost0      U8202.E4D.841FE3W-V1-C61                5
+
+Status:NOT_LOGGED_IN
+FC name:fcs2                    FC loc code:U78AA.001.WZSL6G3-P1-C4-T1
+Ports logged in:0
+Flags:4<NOT_LOGGED>
+VFC client name:                VFC client DRC:
+
+$ lsmap -all -npiv -fmt ,
+vfchost0,U8202.E4D.841FE3W-V1-C61,5, , ,NOT_LOGGED_IN,fcs2,U78AA.001.WZSL6G3-P1-C4-T1,0,4, ,
+$
+
+
+
+$ lsmap -all -net
+SVEA   Physloc
+------ --------------------------------------------
+ent12  U8202.E4D.841FE3W-V1-C20-T1
+
+SEA                   ent14
+Backing device        ent13
+Status                Available
+Physloc
+
+$ lsmap -all -net -fmt ,
+ent12,U8202.E4D.841FE3W-V1-C20-T1,ent14,ent13,Available,
+
