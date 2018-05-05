@@ -1,0 +1,6 @@
+CPU usage CPU使用率
+Memory usage 内存使用率
+Inbound network traffic rate 网络下行速率
+Outbound network traffic rate 网络上行速率
+Network packet loss rate 网络丢包率
+Disk usage 磁盘使用率
