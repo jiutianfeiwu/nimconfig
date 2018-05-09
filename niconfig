@@ -107,3 +107,6 @@ Using the bosinst.data file:
 /usr/lpp/bosinst/bicheck filename
 
 lsconf |grep -E 'Machine Serial Number|LPAR Info'
+
+
+clean nfs cache :http://www-01.ibm.com/support/docview.wss?uid=isg3T1012561#5
