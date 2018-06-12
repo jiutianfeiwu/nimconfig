@@ -1,0 +1,162 @@
+# @(#) 39 1.11.5.1 src/bos/usr/lpp/bosinst/bosinst.template/bosinst.template, bosinst, bos61Q, 1102A_61Q 12/14/10 09:51:50
+# IBM_PROLOG_BEGIN_TAG 
+# This is an automatically generated prolog. 
+#  
+# bos61Q src/bos/usr/lpp/bosinst/bosinst.template/bosinst.template 1.11.5.1 
+#  
+# Licensed Materials - Property of IBM 
+#  
+# COPYRIGHT International Business Machines Corp. 1993,1994 
+# All Rights Reserved 
+#  
+# US Government Users Restricted Rights - Use, duplication or 
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+#  
+# IBM_PROLOG_END_TAG 
+#
+#   COMPONENT_NAME: BOSINST
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1997
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NOTE:  After this first comment section ends, COMMENTS WILL NOT BE ALLOWED.
+#
+# NOTE: Stanzas follow these rules:
+#       1. Stanza names must be at the beginning of the line and end in a colon.
+#       2. Comments may be after the colon, but THAT'S THE ONLY PLACE!!!! other
+#          than here in the header.  Even then, don't expect those comments
+#          to be put back where they were after BOS install gets done processing
+#          this file.  We reserve the right to mangle and ignore all comments
+#          which are not placed in this header.
+#       3. Stanza fields are on lines following stanza names,  Stanza fields
+#          must NOT begin at the beginning of the line, but must have tabs or
+#          blanks in front of them.
+#       4. There can be no blank lines between field lines of the same stanza.
+#       5. A blank line MUST separate each stanza.  In other words, after the
+#          last field line of the stanza, a blank line must follow before the
+#          line containing the stanza name of the next stanza.
+##################################################################################
+
+##################################################################################
+#
+# CONTROL_FLOW STANZA:
+# control_flow defines the flow of control during BOS install.
+# control_flow:
+#     CONSOLE = Default,< Device which will be your console.  Passed to chcons. >
+#     INSTALL_METHOD = overwrite, preserve, migrate, erase_only
+#     INSTALL_EDITION = express, standard, enterprise
+#     PROMPT = yes,no
+#     EXISTING_SYSTEM_OVERWRITE = yes,no,any
+#     INSTALL_X_IF_ADAPTER = yes,no,all
+#     RUN_STARTUP = yes,no
+#     RM_INST_ROOTS = yes,no
+#     ERROR_EXIT = < Command to run when error occurs.  Must be in boot image. >
+#     CUSTOMIZATION_FILE = < Command to run after BOS install finishes. >
+#     TCB = yes, no  <turns on/off trusted computing base>
+#     INSTALL_TYPE = 
+#     BUNDLES = < Fully qualified Bundle file(s) to install after auto install.
+#		  Maximum of 139 bytes total.   Custom bundle files
+#                 provided on a diskette with the bosinst.data file must
+#                 prefix the bundle file pathname with /../.
+#		  If the list of bundle file names exceeds 139 bytes,
+#		  cat all the bundle files together into a single custom bundle
+#		  file and specify the name of the single custom bundle
+#		  file.>
+#     RECOVER_DEVICES = Default,yes,no
+#     BOSINST_DEBUG = no,yes 
+#     ACCEPT_LICENSES = no,yes 
+#     ACCEPT_SWMA = no,yes 
+#     DESKTOP = CDE,NONE,GNOME,KDE 
+#     INSTALL_DEVICES_AND_UPDATES = yes,no 
+#     IMPORT_USER_VGS = yes,no
+#     CREATE_JFS2_FS = Default,no,yes 
+#     ALL_DEVICES_KERNELS = yes,no
+#     GRAPHICS_BUNDLE = yes,no (defaults to yes, includes sysmgt.websm)
+#     SYSTEM_MGMT_CLIENT_BUNDLE = yes,no (defaults to yes)
+#     FIREFOX_BUNDLE = no,yes (defaults to no, requires additional CDs)
+#     KERBEROS_5_BUNDLE = no,yes (defaults to no unless you are running
+#		Kerberos Authentication; requires additional CDs)
+#     SERVER_BUNDLE = no,yes (defaults to no)
+#     REMOVE_JAVA_118 = no,yes (defaults to no, only applicable for migration)
+#     HARDWARE_DUMP = yes,no (defaults to yes)
+#     ADD_CDE = no,yes (defaults to no)
+#     ADD_GNOME = no,yes (defaults to no)
+#     ADD_KDE = no,yes (defaults to no)
+#     ERASE_ITERATIONS = < Number of times to erase hard drives, 0 to 8.> 
+#                        (defaults to 0)
+#     ERASE_PATTERNS = < Comma seperated list of the hexadecimal patterns to 
+#                        write to the drive while erasing.  A valid pattern is
+#                        between 0 and ffffffff. >
+#     MKSYSB_MIGRATION_DEVICE = /dev/[cd#|rmt#] | network (defaults to blank)
+#     TRUSTED_AIX = no,yes (defaults to no, enables Multilevel security)
+#     TRUSTED_AIX_LSPP = no,yes (defaults to no, Trusted AIX in LSPP/EAL4+ mode)
+#     TRUSTED_AIX_SYSMGT = yes,no (defaults to yes, installs Java with Tr.AIX
+#     SECURE_BY_DEFAULT = no,yes (defaults to no, a minimal AIX Security
+#                        Expert install
+#     ADAPTER_SEARCH_LIST = a space separated list of adapters, that can be 
+#                           used to limit the disk selection choices.
+#
+#     PLEASE READ /usr/lpp/bosinst/bosinst.template.README for more information
+#
+##################################################################################
+
+control_flow:
+    CONSOLE = Default
+    INSTALL_METHOD = overwrite
+    INSTALL_EDITION = standard
+    PROMPT = no
+    EXISTING_SYSTEM_OVERWRITE = yes
+    INSTALL_X_IF_ADAPTER = yes
+    RUN_STARTUP = yes
+    RM_INST_ROOTS = no
+    ERROR_EXIT =
+    CUSTOMIZATION_FILE =
+    TCB = no
+    INSTALL_TYPE =
+    BUNDLES =
+    RECOVER_DEVICES = no
+    BOSINST_DEBUG = no
+    ACCEPT_LICENSES = yes
+    ACCEPT_SWMA =
+    DESKTOP = NONE
+    INSTALL_DEVICES_AND_UPDATES = yes
+    IMPORT_USER_VGS =
+    CREATE_JFS2_FS = Default
+    ALL_DEVICES_KERNELS = yes
+    GRAPHICS_BUNDLE = yes
+    SYSTEM_MGMT_CLIENT_BUNDLE = yes
+    FIREFOX_BUNDLE = no
+    KERBEROS_5_BUNDLE = no
+    SERVER_BUNDLE = no
+    REMOVE_JAVA_118 = no
+    HARDWARE_DUMP = yes
+    ADD_CDE = no
+    ADD_GNOME = no
+    ADD_KDE = no
+    ERASE_ITERATIONS = 0
+    ERASE_PATTERNS =
+    MKSYSB_MIGRATION_DEVICE =
+    TRUSTED_AIX = no
+    TRUSTED_AIX_LSPP = no
+    TRUSTED_AIX_SYSMGT = yes
+    SECURE_BY_DEFAULT = no
+    ADAPTER_SEARCH_LIST =
+
+target_disk_data:
+    LOCATION = 
+    SIZE_MB = 
+    HDISKNAME = 
+
+locale:
+    BOSINST_LANG = 
+    CULTURAL_CONVENTION = 
+    MESSAGES = 
+    KEYBOARD = 
