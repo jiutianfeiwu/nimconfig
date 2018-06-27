@@ -33,3 +33,4 @@ transferredBytes
 receivedPackets
 receivedBytes
 sentPackets
+^#([^\s#A-Z\p{han}:\d\*\?\[<\>\-=\./\~+\!"]{1,50}) 
