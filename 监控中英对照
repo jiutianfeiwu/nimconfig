@@ -4,3 +4,24 @@ Inbound network traffic rate 网络下行速率
 Outbound network traffic rate 网络上行速率
 Network packet loss rate 网络丢包率
 Disk usage 磁盘使用率
+
+{
+  "result": true,
+  "code": 0,
+  "msg": "SUCCESS",
+  "data": {
+    "licenseVersion": "0.10",
+    "customInfo": "睿智大数据",
+    "projectId": "RAYSDATA-000",
+    "product": "华为小机",
+    "productVersion": "0.0.1",
+    "licenseType": "develop",
+    "expireDate": "2018-05-01",
+    "extdata": {
+      "vmNum": "100",
+      "lparNum": "99",
+      "osNum": "98"
+    }
+  },
+  "isNotPage": false
+}
