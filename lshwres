@@ -1,0 +1,10 @@
+hscroot@hmc100:~> chhwres -r virtualio -m Server-9117-MMA-SN65AD062 -o a --id 1 --rsubtype eth -a "ieee_virtual_eth=1,port_vlan_id=4,"vswitch=ETHERNET0",is_trunk=1,trunk_priority=1"
+hscroot@hmc100:~> lshwres -r virtualio --rsubtype vnetwork -m Server-9117-MMA-SN65AD062
+
+
+chhwres -r virtualio -m Server-8202-E4D-SN841FE3W -o r --id 1 --rsubtype eth -s 3
+
+chhwres -r virtualio -m  Server-8202-E4D-SN841FE3W -o  a --rsubtype vswitch --vswitch vswitch0
+lshwres -r virtualio -m  Server-8202-E4D-SN841FE3W --rsubtype vswitch
+
+chdev -dev ent14 -attr virt_adapters=ent12,ent15
