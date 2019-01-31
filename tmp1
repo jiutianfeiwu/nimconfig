@@ -12,3 +12,103 @@ curl "https://100.100.150.67:31443/powerAPI/provider/load?sample_time=1530867771
 
 curl "https://100.100.150.67:31443/powerAPI/vmachine/get/476?sample_time=1531110285661" -H "Cookie: tiny_language=zh-CN; roleType=0; admin_lastState=admin.dashBoard; XSRF-TOKEN=DC589C356B5E7CCB57C213238B256EF10E434FEE50BC4D4B; SESSION=74e8350a-708f-445e-9087-c6039ed89246" -H "X-XSRF-TOKEN: DC589C356B5E7CCB57C213238B256EF10E434FEE50BC4D4B" -H "isTenantsAdmin: 0" -H "Accept-Language: zh-CN,zh;q=0.9" -H "roleName: SysAdmin" -H "X-Auth-Token: gAAAAABbQuNlvAHkWdkkAKLjjmNZFj1mjR1v85hH3MdoA9frWo93mfjEKFKh-12sW3BicVGYEKVXcxe0WDkGLNWsAb3dukJ9Ah1ZbiAS96CgzerklkHwbAeOhJBFfvEU4oy_tBXyhS5EI9SmFXQO5oTKH_o0MVwRw0rzcJ4918G-S7wJj2g0NZ8" -H "Accept-Encoding: gzip, deflate, br" -H "maxLevRoleId: 0" -H "Connection: keep-alive" -H "roleId: BEAEA720-67E2-4FCF-BB3E-92A4DB010DFF" -H "tenantsId: admin" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36" -H "isSysAdmin: 1" -H "Content-Type: application/json" -H "Accept: application/json, text/plain, */*" -H "maxLevRoleName: SysAdmin" -H "Referer: https://100.100.150.67:31443/power/" -H "X-Subject-Token: null" -H "UserId: dec9b8df91ab488f9230fe03cd611cf7" --compressed --insecure &
 curl "https://100.100.150.67:31443/powerAPI/dynamic/reconfigLapr" -H "Origin: https://100.100.150.67:31443" -H "X-XSRF-TOKEN: DC589C356B5E7CCB57C213238B256EF10E434FEE50BC4D4B" -H "isTenantsAdmin: 0" -H "roleName: SysAdmin" -H "X-Auth-Token: gAAAAABbQuNlvAHkWdkkAKLjjmNZFj1mjR1v85hH3MdoA9frWo93mfjEKFKh-12sW3BicVGYEKVXcxe0WDkGLNWsAb3dukJ9Ah1ZbiAS96CgzerklkHwbAeOhJBFfvEU4oy_tBXyhS5EI9SmFXQO5oTKH_o0MVwRw0rzcJ4918G-S7wJj2g0NZ8" -H "maxLevRoleId: 0" -H "roleId: BEAEA720-67E2-4FCF-BB3E-92A4DB010DFF" -H "tenantsId: admin" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36" -H "isSysAdmin: 1" -H "Content-Type: application/json" -H "Accept: application/json, text/plain, */*" -H "maxLevRoleName: SysAdmin" -H "Referer: https://100.100.150.67:31443/power/" -H "X-Subject-Token: null" -H "UserId: dec9b8df91ab488f9230fe03cd611cf7" --data-binary "^{^\^"pmCpu^\^":0.9,^\^"pmMem^\^":10880,^\^"coreSpecId^\^":101,^\^"maxCpu^\^":1,^\^"cpu^\^":0.5,^\^"minCpu^\^":0.5,^\^"maxVCpu^\^":10,^\^"vcpu^\^":5,^\^"minVCpu^\^":5,^\^"maxMem^\^":3072,^\^"memory^\^":1024,^\^"minMem^\^":1024,^\^"mode^\^":^\^"shared^\^",^\^"vmid^\^":476,^\^"hostId^\^":22^}" --compressed
+     				   				
+可用区需求:对可用区的数据进行增删查改的操作。
+
+接口类	Method	URL	接口描述	传入参数	返回值
+
+
+
+
+
+
+AzController	GET	/admin/api/v2/az/findAzList	查询可区去列表(包括根据名称进行模糊查询)	azName(String),可选
+	ResponseResult的所有字段
+	POST	/admin/api/v2/az/createAz	新建可用区	AvailabilityZone中规定的属性	ResponseResult
+的所有字段
+	POST	/admin/api/v2/az/updateAz	修改可用区	AvailabilityZone的修改后的属性，必须带azId	ResponseResult
+的所有字段
+	POST	/admin/api/v2/az/deleteAzById	删除可用区（支持多删除）	azId传入可用区ID拼接的字符串，用”,”隔开,只有一个id不需要拼接”,”。
+Ex:”21323,43434,232323”	ResponseResult
+的所有字段
+	GET	/admin/api/v2/az/findAzById	根据ID查询可用区信息	azId:可用区id（必选）	ResponseResult
+的所有字段
+入参：
+查询接口入参：
+	中文可用区名：
+	{
+		“azName”:”华南”,
+		“local”:”ZH”
+}
+英文可用区名：
+{
+		“azName”:”china_south”,
+		“local”:”US”
+}
+删除接口入参:如果传入一个id，不需要拼接“,”
+	
+azIds=2e21e03f4f3d846bee03b173f32f,2e21e03f4f3d846bee03b173fewe, 2e21e03f4f3d846bee03b173fddd
+其他接口入参:更新接口必须携带azId,新建接口不用携带.
+	{
+		"azId":"",
+		"azName":"中国",
+		"azDes":"",
+		"azStatus":"",
+		"azCreateDateStr":"",
+		"azUpdateDateStr":"",
+		"regionId":""
+}
+出参：
+查询接口出参：
+	{
+    "result": true,
+    "code": 200,
+    "message": "SUCCESS",
+    "data": [
+        {
+            "azId": "5132fb34-4486-43e6-9835-ba00e4005575",
+            "azName": "中国NO.1111"
+            "azDes": null,
+            "azCreateDateStr": "2019-01-17",
+            "azUpdateDateStr": "2019-01-17",
+            "azStatus": "Y",
+            "regionId": "cn-region-1",
+        },
+        {
+            "azId": "2e21e03f4f3d846bee03b173fd2f",
+            "azName": "华南",
+            "azDes": null,
+            "azCreateDateStr": "2019-01-17",
+            "azUpdateDateStr": "2019-01-17",
+            "azStatus": "Y",
+            "regionId": "cn-region-1"
+        }
+    ]
+}
+其他接口出参：
+	{
+		“result”:”true”,
+		“code”:”200”,
+		“message”:”SUCCESS”,
+		“data”:””
+}							
+可用区实体类	属性	属性描述	是否必须
+
+
+
+
+AvailabilityZone	azId	可用区ID(String)	否
+	azName	可用区名称(String)	是
+	azDes	可用区描述(String)	可选
+	azCreateDateStr	创建时间字符串(String)	否
+	azUpdateDateStr	更新时间字符串(String)	否
+	azStatus	状态(String)(“Y”:可用,”N”:不可用, “U”:正在使用中)	否
+	regionId	资源所在部署Zone ID(String)	否
+
+返回值实体类	属性	属性描述	属性类型
+
+ResponseResult	result	操作结果(true,false)	boolean
+	code	操作状态码(200成功，400失败)	Integer
+	message	消息(“SUCCESS”,”FAIL”)	String
+	data	返回的数据(数组)	Object
+
