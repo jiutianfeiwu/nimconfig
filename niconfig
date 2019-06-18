@@ -110,3 +110,8 @@ lsconf |grep -E 'Machine Serial Number|LPAR Info'
 
 
 clean nfs cache :http://www-01.ibm.com/support/docview.wss?uid=isg3T1012561#5
+
+
+nim -o define -t ent  -a net_addr=18.5.203.0   -a snm=255.255.255.0   -a routing1="default 10.125.188.254"  18-5-203-net
+nim -o change -a  routingseq_no='18-5-203-net 10.125.188.254' 10-125-188-net
+
